@@ -10,19 +10,40 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 let db;
-mongoose.connect('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', {
+const userDbConnection = mongoose.createConnection('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+const choicesDbConnection = mongoose.createConnection('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+/*mongoose.connect('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
 .then(() => console.log('Connected to MongoDB Atlas'))
-.catch((err) => console.log('Failed to connect to MongoDB Atlas', err));
+.catch((err) => console.log('Failed to connect to MongoDB Atlas', err));*/
 const userSchema = new mongoose.Schema({
   username: String,
   password: String
 });
-const User = mongoose.model('User', userSchema);
 
 
+const choicesSchema = new mongoose.Schema({
+  location: String
+});
+
+const User= userDbConnection.model('UserCredentials', userSchema);
+const Choices = choicesDbConnection.model('UserChoices', choicesSchema);
+
+// Connect to the MongoDB server
+userDbConnection.on('connected', function () {
+  console.log('Connected to user database');
+});
+userDbConnection.on('error', function (err) {
+  console.log('Error connecting to user database:', err.message);
+});
+choicesDbConnection.on('connected', function () {
+  console.log('Connected to choices database');
+});
+choicesDbConnection.on('error', function (err) {
+  console.log('Error connecting to choices database:', err.message);
+});
 app.post('/Login', async(req, res) => {
   try{
     console.log(req.body.username);
@@ -46,7 +67,6 @@ app.post('/Login', async(req, res) => {
  // console.log(`Username: ${username}, Password: ${password}`);
 
 });
-
 
 app.post('/Register', async (req, res) => {
   const newUser = new User({
