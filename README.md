@@ -14,8 +14,10 @@ without high taxes.
 Frontend: ReactJs, Bootstrap, HTML, CSS, Javascript
 Backend: NodeJS,Express
 Database: MongoDB
+
 ● Axios is a popular JavaScript library used to make HTTP requests from a web browser
 or Node.js. It provides a simple and easy-to-use interface for sending asynchronous
 HTTP requests and handling the responses.
+
 ● Database Management: managing large amounts of data using including user profiles
 and transactions is implemented using MongoDB-a NoSQL database
