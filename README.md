@@ -1,5 +1,5 @@
 # BorderlessBuy
-#Abstract:
+# Abstract:
 BorderlessBuy is an e-commerce platform through which, consumers in India can contact
 travellers who are willing to transport goods from the USA and other nations in exchange for a
 small charge. Providing a hassle-free shopping experience, the platform calculates the final cost
@@ -7,7 +7,9 @@ and manages all transactions. Reliability and safety are ensured through a ratin
 the platform makes money by charging a commission. Travelers now have the chance to make
 extra money thanks to BorderlessBuy, which provides access to goods from all around the world
 without high taxes.
-#Programming concepts used:
+
+# Programming concepts used:
+
 ● Tech-Stack:
 Frontend: ReactJs, Bootstrap, HTML, CSS, Javascript
 Backend: NodeJS,Express
