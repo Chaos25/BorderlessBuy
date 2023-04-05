@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Header_home } from './Header_home'
 import Carousel from 'react-bootstrap/Carousel';
+import {BrowserRouter as Router, Routes,Route, Link, Navigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function Person() {
+  const[flag,setF]=useState()
   return (
     <>
     <Header_home/>
@@ -20,7 +22,8 @@ function Person() {
       <br/>
       <br/>
       <br/>
-      <div className='marginn'><button className='btn next'>Submit</button></div>
+      <div className='marginn'><button className='btn next' onClick={setF(1)}>Submit</button></div>
+      {flag?<Navigate to={"/Order"}/>:<h4></h4>}
           </div>
    
             

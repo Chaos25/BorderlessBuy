@@ -118,7 +118,7 @@ function Findmatch() {
       <br/>
       {pname=product_name}
       <div className='marginn'><button className='btn next' onClick={handleSubmit}>Submit</button></div>
-      {status?<Navigate to={"/Order"}/>:<h4></h4>}
+      {status?<Navigate to={"/Results"}/>:<h4></h4>}
           </div>
    
             
