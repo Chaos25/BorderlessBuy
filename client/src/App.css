@@ -9,7 +9,7 @@
 
 .login_page{
  
-  height: fit-content;
+  height: max-content;
   padding: 70px;
   justify-content: center;
   width: 70%;
