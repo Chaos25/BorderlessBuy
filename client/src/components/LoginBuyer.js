@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Routes,Route, Link, Navigate } from 'react-rout
 import { Header_home } from './Header_home';
 
 
-export function Login()
+export function LoginBuyer()
 {
     //const [f,setF]=useState();
     
@@ -30,10 +30,10 @@ export function Login()
         password: pwdLog,
       };
   
-      axios.post('http://localhost:3002/Login', data)
+      axios.post('http://localhost:3002/LoginBuyer', data)
         .then(response => {
           console.log(response.data);
-          if(response.data==='User logged in successfully'){
+          if(response.data==='Buyer logged in successfully'){
             setFlag(1);
           }
         })
@@ -54,7 +54,7 @@ export function Login()
         </div>
         <div className=" login_page">
             <div className=' card login_signup_card'>
-            <br/><h1 className='card_title'>Login</h1>
+            <br/><h1 className='card_title'>Buyer Login</h1>
             <br/>
             <div className="mb-3">
             <input type="text" className="form-control text-container" placeholder="Username"onChange={handleUsernameChange}/>
@@ -70,13 +70,10 @@ export function Login()
            
             
             <br/>
-            <Link to="/LoginBuyer" id='create'>
-        Login as Buyer
-        </Link>
-            <br/>
             <Link to="/Signup" id='create'>
         Create Account
         </Link>
+            <br/>
             <br/>
             
            {/* {f?<Navigate to={"/"+usernameLog+"/Results"}/>:<h4>{loginStatus}</h4>}*/}

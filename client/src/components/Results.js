@@ -14,54 +14,57 @@ function Results() {
       <h1 className='card_title' >Here are people that might be able to help you:</h1>
       <div className='container'> <br/>
       <br/>
-      <Link to={"/"+usernameLog+"/Person"} className="btn next">Take test</Link>
+   
       <Link to={"/"+usernameLog+"/Person"}><div className=" card res-card ">
-        <div className='profile_img' ><PersonPinCircleRoundedIcon style={{ fontSize: 120 }}/> </div>
-        <div className='info'><div>Name: Riddhi Dayma</div>
+        {/*<div className='profile_img' ><PersonPinCircleRoundedIcon style={{ fontSize: 120 }}/> </div>*/}
+        <div className='info'>
             <div>Location: San Francisco</div>
             <div>Date of departure: 13/3/23</div>
-            <div>Date of arrival: 20/3/23</div></div>
+            <div>Date of arrival: 20/3/23</div>
+            <div>Rating:</div></div>
             
        
       </div></Link>
       <Link to={"/"+usernameLog+"/Person"}>
       <div className=" card res-card ">
-        <div className="profile_img"><PersonPinCircleRoundedIcon fontSize='large'/> </div>
-        <div className='info'><div>Name: Riddhi Dayma</div>
+        {/*<div className="profile_img"><PersonPinCircleRoundedIcon fontSize='large'/> </div>*/}
+        <div className='info'>
             <div>Location: San Francisco</div>
             <div>Date of departure: 13/3/23</div>
-            <div>Date of arrival: 20/3/23</div></div>
+            <div>Date of arrival: 20/3/23</div>
+            <div>Rating:</div></div>
             
        
       </div></Link>
       <Link to={"/"+usernameLog+"/Person"}>
       <div className=" card res-card ">
-        <div className="profile_img"><PersonPinCircleRoundedIcon fontSize='large'/> </div>
-        <div className='info'><div>Name: Riddhi Dayma</div>
+       
+        <div className='info'>
             <div>Location: San Francisco</div>
             <div>Date of departure: 13/3/23</div>
-            <div>Date of arrival: 20/3/23</div></div>
+            <div>Date of arrival: 20/3/23</div>
+            <div>Rating:</div></div>
             
        
       </div></Link>
       <Link to={"/"+usernameLog+"/Person"}>
       <div className=" card res-card ">
-        <div className="profile_img"><PersonPinCircleRoundedIcon fontSize='large'/> </div>
-        <div className='info'><div>Name: Riddhi Dayma</div>
+        <div className='info'>
             <div>Location: San Francisco</div>
             <div>Date of departure: 13/3/23</div>
-            <div>Date of arrival: 20/3/23</div></div>
+            <div>Date of arrival: 20/3/23</div>
+            <div>Rating:</div></div>
             
        
       </div>
       </Link>
       <Link to={"/"+usernameLog+"/Person"}>
       <div className=" card res-card ">
-        <div className="profile_img"><PersonPinCircleRoundedIcon fontSize='large'/> </div>
-        <div className='info'><div>Name: Riddhi Dayma</div>
+        <div className='info'>
             <div>Location: San Francisco</div>
             <div>Date of departure: 13/3/23</div>
-            <div>Date of arrival: 20/3/23</div></div>
+            <div>Date of arrival: 20/3/23</div>
+            <div>Rating:</div></div>
             
        
       </div></Link>

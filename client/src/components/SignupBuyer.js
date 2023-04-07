@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import axios from 'axios'
 import {BrowserRouter as Router, Routes,Route, Link,Navigate } from 'react-router-dom'
 import { Header_home } from './Header_home'
-export const Signup=()=>{
+export const SignupBuyer=()=>{
   const[flag,setFlag]=useState()
     const [usernameReg,setUsernameReg]= useState('')
     const [pwdReg,setPwdReg]= useState('')
@@ -22,7 +22,7 @@ export const Signup=()=>{
         password: pwdReg,
       };
   
-      axios.post('http://localhost:3002/Register', data)
+      axios.post('http://localhost:3002/RegisterBuyer', data)
         .then(response => {
           console.log(response.data);
           if(response.data==='User with email already exists'){
@@ -61,9 +61,6 @@ return(
             <input type="password" className="form-control" placeholder='Password' onChange={handlePasswordChange}/>
             <br/>
             <br/>
-            <Link to="/SignupBuyer" id='create'>
-        Signup as Buyer
-        </Link>
             <div className='marginn'><button type="submit" className="btn next" onClick={handleSubmit}>Sign Up!</button></div>
             {flag?<Navigate to={"/"+usernameReg+"/Findmatch"}/>:<h4></h4>}
             <br/>
