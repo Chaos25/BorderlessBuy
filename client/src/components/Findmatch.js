@@ -2,10 +2,11 @@ import React,{useState} from 'react'
 import { Header_home } from './Header_home'
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios'
-import {BrowserRouter as Router, Routes,Route, Link, Navigate } from 'react-router-dom'
+import {BrowserRouter as Router, Routes,Route, Link, Navigate,useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function Findmatch() {
   var pname;
+  const usernameLog= useParams().user
   const[product_name,setPName]=useState('');
   const[loc,setloc]=useState('');
   const[loc2,setloc2]=useState('');
@@ -118,7 +119,7 @@ function Findmatch() {
       <br/>
       {pname=product_name}
       <div className='marginn'><button className='btn next' onClick={handleSubmit}>Submit</button></div>
-      {status?<Navigate to={"/Results"}/>:<h4></h4>}
+      {status?<Navigate to={"/"+usernameLog+"/Results"}/>:<h4></h4>}
           </div>
    
             

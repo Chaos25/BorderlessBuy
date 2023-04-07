@@ -3,8 +3,9 @@ import { Header_home } from './Header_home'
 import PersonPinCircleRoundedIcon from '@mui/icons-material/PersonPinCircleRounded';
 import Carousel from 'react-bootstrap/Carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {Link, Navigate} from 'react-router-dom'
+import {Link, Navigate,useParams} from 'react-router-dom'
 function Results() {
+  const usernameLog= useParams().user
   return (
     <>
     <Header_home/>
@@ -13,7 +14,8 @@ function Results() {
       <h1 className='card_title' >Here are people that might be able to help you:</h1>
       <div className='container'> <br/>
       <br/>
-      <Link to="/Order"><div className=" card res-card ">
+      <Link to={"/"+usernameLog+"/Person"} className="btn next">Take test</Link>
+      <Link to={"/"+usernameLog+"/Person"}><div className=" card res-card ">
         <div className='profile_img' ><PersonPinCircleRoundedIcon style={{ fontSize: 120 }}/> </div>
         <div className='info'><div>Name: Riddhi Dayma</div>
             <div>Location: San Francisco</div>
@@ -22,7 +24,7 @@ function Results() {
             
        
       </div></Link>
-      <Link to="/Person">
+      <Link to={"/"+usernameLog+"/Person"}>
       <div className=" card res-card ">
         <div className="profile_img"><PersonPinCircleRoundedIcon fontSize='large'/> </div>
         <div className='info'><div>Name: Riddhi Dayma</div>
@@ -32,7 +34,7 @@ function Results() {
             
        
       </div></Link>
-      <Link to="/Person">
+      <Link to={"/"+usernameLog+"/Person"}>
       <div className=" card res-card ">
         <div className="profile_img"><PersonPinCircleRoundedIcon fontSize='large'/> </div>
         <div className='info'><div>Name: Riddhi Dayma</div>
@@ -42,7 +44,7 @@ function Results() {
             
        
       </div></Link>
-      <Link to="/Person">
+      <Link to={"/"+usernameLog+"/Person"}>
       <div className=" card res-card ">
         <div className="profile_img"><PersonPinCircleRoundedIcon fontSize='large'/> </div>
         <div className='info'><div>Name: Riddhi Dayma</div>
@@ -53,7 +55,7 @@ function Results() {
        
       </div>
       </Link>
-      <Link to="/Person">
+      <Link to={"/"+usernameLog+"/Person"}>
       <div className=" card res-card ">
         <div className="profile_img"><PersonPinCircleRoundedIcon fontSize='large'/> </div>
         <div className='info'><div>Name: Riddhi Dayma</div>

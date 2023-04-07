@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import { Header_home } from './Header_home'
 import Carousel from 'react-bootstrap/Carousel';
-import {BrowserRouter as Router, Routes,Route, Link, Navigate } from 'react-router-dom'
+import {BrowserRouter as Router, Routes,Route, Link, Navigate,useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function Person() {
+  const usernameLog= useParams().user
   const[flag,setF]=useState()
+  
+  const handleSubmit = async event => {
+    event.preventDefault();
+   setF(1);  
+    };
   return (
     <>
     <Header_home/>
@@ -22,8 +28,8 @@ function Person() {
       <br/>
       <br/>
       <br/>
-      <div className='marginn'><button className='btn next' onClick={setF(1)}>Submit</button></div>
-      {flag?<Navigate to={"/Order"}/>:<h4></h4>}
+      <div className='marginn'><button className='btn next' onClick={handleSubmit}>Submit</button></div>
+      {flag?<Navigate to={"/"+usernameLog+"/Order"}/>:<h4></h4>}
           </div>
    
             

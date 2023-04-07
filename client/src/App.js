@@ -16,6 +16,7 @@ import Person from './components/Person';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import PaymentStatus from './components/PaymentStatus';
 import Orders from './components/Orders';
+import Reviews from './components/Reviews';
 
 
 
@@ -99,14 +100,15 @@ async function displayRazorpay() {
     <Route path="/MainPage" element={<MainPage/>}/>
     <Route path="/Login" element={<Login/>}/>
     <Route path="/Signup" element={<Signup/>}/>
-    <Route path="/Findmatch" element={<Findmatch/>}/>
-    <Route path="/Results" element={<Results/>}/>
-    <Route path="/Person" element={<Person/>}/>
+    <Route path="/Review" element={<Reviews/>}/>
+    <Route path="/:user/Findmatch" element={<Findmatch/>}/>
+    <Route path="/:user/Results" element={<Results/>}/>
+    <Route path="/:user/Person" element={<Person/>}/>
     <Route
           path="/payment/status/:paymentId"
           element={<PaymentStatus/>}
         />
-        <Route path="/Order"element={<Orders/>}/>
+        <Route path=":user/Order"element={<Orders/>}/>
   </Routes>
     </Router>
  
