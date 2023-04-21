@@ -5,10 +5,11 @@ import axios from 'axios'
 import {BrowserRouter as Router, Routes,Route, Link, Navigate,useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function Findmatch() {
-  var pname;
+  const [buyerdetails, setBuyerDetails] = useState([]);
   const usernameLog= useParams().user
   const[product_name,setPName]=useState('');
   const[loc,setloc]=useState('');
+  const[price,setprice]=useState('');
   const[loc2,setloc2]=useState('');
   const[link,setlink]=useState('');
   const[status,setStatus]=useState();
@@ -17,28 +18,53 @@ function Findmatch() {
   };
   const handleSubmit = async event => {
     event.preventDefault();
-    pname=product_name;
     const data = {
       pname: product_name,
       locUser:loc,
       locBuyer:loc2,
-      link:link
+      link:link,
+      price:price
 
     };
 
     await axios.post('http://localhost:3002/Findmatch', data)
       .then(response => {
-        if(response.data==='Product submitted'){
-          setStatus(1);
+        if(response.data==='Buyer with given preferences not found'){
+          setStatus(0);
         }
-        else setStatus(0);
-        console.log(response.data);
+        else setStatus(1);
+        //console.log(response.data);
+        setBuyerDetails(response.data);
       })
       .catch(error => {
         console.log(error);
       });
      
     };
+    async function handleElementClick(data) {
+      const data2 = {
+        pname: product_name,
+        locUser:loc,
+        locBuyer:loc2,
+        link:link,
+        username:usernameLog,
+        buyer:data.username,
+        date1:data.Arrival,
+        date2:data.Departure,
+        price:price
+  
+      };
+      await axios.post('http://localhost:3002/Merge', data2)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      
+    }
+    
+    
   return (
     <>
     <Header_home/><div className="container carousel-wrapper-custom carousel-wrapper" style={{ height: '300px' }}>
@@ -50,8 +76,8 @@ function Findmatch() {
           alt="First slide"
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+         {/* <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*/}
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -62,8 +88,8 @@ function Findmatch() {
         />
 
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          {/*<h3>Second slide label</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -74,10 +100,10 @@ function Findmatch() {
         />
 
         <Carousel.Caption>
-          <h3>Third slide label</h3>
+          {/*<h3>Third slide label</h3>
           <p>
             Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
+        </p>*/}
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
@@ -113,13 +139,45 @@ function Findmatch() {
           }}className='form-control'/>
       <input type="text" placeholder='Drop Location' onChange={(e)=>{
             setloc(e.target.value);
-          }} className='form-control'/></div>
+          }} className='form-control'/>
+          <input type="text" placeholder='Price'onChange={(e)=>{
+            setprice(e.target.value);
+          }}className='form-control' /></div>
       <br/>
       <br/>
       <br/>
-      {pname=product_name}
+      
+   
+   
+
       <div className='marginn'><button className='btn next' onClick={handleSubmit}>Submit</button></div>
-      {status?<Navigate to={"/"+usernameLog+"/Results"}/>:<h4></h4>}
+      <div className='card login_page'>
+      <h1 className='card_title' >Here are people that might be able to help you:</h1>
+      <div className='container'> <br/>
+      <br/>
+      <div >
+      {status ? buyerdetails.map((data, index) => (
+  <div key={index} onClick={() => handleElementClick(data)}>
+    <Link to={`/${usernameLog}/Order`} className="card res-card">
+      <div className='info'>
+        <div>Location: {data.loc1}</div>
+        <div>Date of departure: {data.Departure}</div>
+        <div>Date of arrival: {data.Arrival}</div>
+        <div>Rating:</div>
+      </div>
+    </Link>
+  </div>
+)) : <h4 className='card_title'>Nothing to show yet!</h4>}
+
+  </div>
+
+      <br/></div>
+      <br/>
+      <br/>
+      <br/>
+          </div>
+     
+      {/*status?<Navigate to={"/"+usernameLog+"/Order"}/>:<h4></h4>*/}
           </div>
    
             

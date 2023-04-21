@@ -19,6 +19,9 @@ import Orders from './components/Orders';
 import Reviews from './components/Reviews';
 import { LoginBuyer } from './components/LoginBuyer';
 import { SignupBuyer } from './components/SignupBuyer';
+import BuyerDetails from './components/BuyerDetails';
+import BuyerRegsuccessful from './components/BuyerRegsuccessful';
+import CalculateCost from './components/CalculateCost';
 
 
 
@@ -108,11 +111,14 @@ async function displayRazorpay() {
     <Route path="/:user/Findmatch" element={<Findmatch/>}/>
     <Route path="/:user/Results" element={<Results/>}/>
     <Route path="/:user/Person" element={<Person/>}/>
+    <Route path="/:user/BuyerDetails" element={<BuyerDetails/>}/>
+    <Route path="/:user/Successfull" element={<BuyerRegsuccessful/>}/>
     <Route
           path="/payment/status/:paymentId"
           element={<PaymentStatus/>}
         />
         <Route path=":user/Order"element={<Orders/>}/>
+        <Route path="/CalculateCost" element={<CalculateCost/>} />
   </Routes>
     </Router>
  

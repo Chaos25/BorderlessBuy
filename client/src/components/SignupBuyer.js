@@ -62,7 +62,7 @@ return(
             <br/>
             <br/>
             <div className='marginn'><button type="submit" className="btn next" onClick={handleSubmit}>Sign Up!</button></div>
-            {flag?<Navigate to={"/"+usernameReg+"/Findmatch"}/>:<h4></h4>}
+            {flag?<Navigate to={"/"+usernameReg+"/BuyerDetails"}/>:<h4></h4>}
             <br/>
            
             <br/>

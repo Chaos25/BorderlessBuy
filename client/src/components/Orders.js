@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Header_home } from './Header_home';
 import Findmatch from './Findmatch';
 function Orders() {
+  const [mergeddata,setmdata]=useState();
+  const[f,setF]=useState()
+  useEffect(()=>{
+    axios.post('http://localhost:3002/xyz')
+    .then(response => {
+      console.log(response.data);
+      setmdata(response.data)
+      setF(1);
+      
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  },[])
+  useEffect(()=>{
+    console.log(mergeddata)
+  },[mergeddata])
+  
   function loadScript(src) {
     return new Promise((resolve) => {
         const script = document.createElement("script");
@@ -27,7 +45,7 @@ async function displayRazorpay() {
   }
 
   // creating a new order
-  const result = await axios.post("http://localhost:3002/payment/orders",{amt:6000});
+  const result = await axios.post("http://localhost:3002/payment/orders",{amt:parseInt(mergeddata.price)*100});
 
   if (!result) {
       alert("Server error. Are you online?");
@@ -50,6 +68,9 @@ async function displayRazorpay() {
               razorpayPaymentId: response.razorpay_payment_id,
               razorpayOrderId: response.razorpay_order_id,
               razorpaySignature: response.razorpay_signature,
+              price:mergeddata.price,
+              user:mergeddata.username,
+              buyer:mergeddata.buyer
           };
 
           const result = await axios.post("http://localhost:3002/payment/success", data);
@@ -72,21 +93,31 @@ async function displayRazorpay() {
   const paymentObject = new window.Razorpay(options);
   paymentObject.open();
 }
+if(!mergeddata){
+  return(
+    <div>Loading...</div>
+  )
+}
   return (
+    
     <div>
       <Header_home/>
+      
       <div className='card login_page'>
       <h1 className='card_title' >Confirm your preferences and proceed to pay</h1>
-      <div className='card'>
-        <label>Product Name: {Findmatch.pname} </label>
+      {f?<div className='card'>
+        
+        <label>Product Name: {mergeddata.pname} </label>
         <br/>
-        <label>Product link: </label>
+        <label>Product link: {mergeddata.link} </label>
         <br/>
-        <label>Delivery location: </label>
+        <label>Delivery location: {mergeddata.location1}</label>
         <br/>
-        <label>Expected Location for order:</label>
-        <br/>
+        <label>Expected Location for order: {mergeddata.location2}</label>
+        <br/> 
+        <label>Price: {mergeddata.price}</label>
         </div>
+        : <p>Loading!</p>}
       <div className='marginn'><button className='btn next' onClick={displayRazorpay}>Confirm and Make Payment</button></div>
           </div>
       

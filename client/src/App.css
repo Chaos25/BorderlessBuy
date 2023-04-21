@@ -171,3 +171,68 @@ select.form-control:focus {
   
   align-items: center;
 }
+.shipment_page {
+background-color: #2B3467;
+  }
+  
+  
+  
+  
+  .shipform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  }
+  
+  
+  
+  
+  label {
+  margin-bottom: 10px;
+  display: flex;
+  width: 100%;
+  }
+  
+  
+  
+  
+  .container-shipment {
+  
+  background-color: #2B3467;
+  
+  color: #BAD7E9;
+  border-radius: 2cm;
+  padding: 1cm;
+  }
+  
+  
+  
+  
+  .shiptext0 {
+  font-weight: bold;
+  }
+  
+  
+  
+  
+  .shiptext1 {
+  color: #FCFFE7;
+  text-decoration: none!important;
+  border-color: #2B3467!important;
+  }
+  
+  
+  
+  
+  .next1 {
+  
+  background-color: #FCFFE7 !important;
+  color: #2B3467 !important;
+  margin: auto;
+  margin: 2px;
+  
+  }
+  
+  

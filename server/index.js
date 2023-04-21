@@ -17,7 +17,8 @@ let db;
 const userDbConnection = mongoose.createConnection('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 const choicesDbConnection = mongoose.createConnection('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 const BuyerDbConnection = mongoose.createConnection('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
-
+const buyerchoicesDbConnection = mongoose.createConnection('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+const mergeDetails = mongoose.createConnection('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 /*mongoose.connect('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -33,20 +34,43 @@ const BuyerSchema = new mongoose.Schema({
   password: String
 });
 var uname;
-
+var link,location1,location2,username,buyer,arrival,departure,price,pname;
+const mergeSchema = new mongoose.Schema({
+  pname:String,
+  link:String,
+  username: String,
+  location1:String,
+  location2:String,
+  Arrival:String,
+  Departure:String,
+  buyer:String,
+  price:String
+  
+});
 
 const choicesSchema = new mongoose.Schema({
   username: String,
   product: String,
   link:String,
   pickup:String,
-  drop:String
+  drop:String,
+  price:String
+
+});
+const buyerchoicesSchema = new mongoose.Schema({
+  username: String,
+  loc1:String,
+  loc2:String,
+  Departure:String,
+  Arrival:String
 
 });
 
 const User= userDbConnection.model('UserCredentials', userSchema);
 const Buyer= BuyerDbConnection.model('BuyerCredentials', BuyerSchema);
 const Choices = choicesDbConnection.model('UserChoices', choicesSchema);
+const BuyerChoices = buyerchoicesDbConnection.model('BuyerChoices', buyerchoicesSchema);
+const MergedData = choicesDbConnection.model('MergedData', mergeSchema);
 
 // Connect to the MongoDB server
 userDbConnection.on('connected', function () {
@@ -66,6 +90,18 @@ choicesDbConnection.on('connected', function () {
 });
 choicesDbConnection.on('error', function (err) {
   console.log('Error connecting to choices database:', err.message);
+});
+buyerchoicesDbConnection.on('connected', function () {
+  console.log('Connected to buyer choices database');
+});
+buyerchoicesDbConnection.on('error', function (err) {
+  console.log('Error connecting to  buyer choices database:', err.message);
+});
+mergeDetails.on('connected', function () {
+  console.log('Connected to merged database');
+});
+mergeDetails.on('error', function (err) {
+  console.log('Error connecting to merged database:', err.message);
 });
 app.post('/Login', async(req, res) => {
   try{
@@ -87,6 +123,38 @@ app.post('/Login', async(req, res) => {
       
   })
   .catch((err) => res.status(500).send('Failed to login'));
+  }
+ catch(err){
+  console.log(err);
+ }
+ // console.log(`Username: ${username}, Password: ${password}`);
+
+});
+app.post('/Merge', async(req, res) => {
+
+  try{
+   console.log(req.body.username)
+   pname=req.body.pname;
+   link=req.body.link;
+    username= req.body.username;
+    location1=req.body.locBuyer;
+    location2=req.body.locUser;
+    arrival=req.body.date1;
+    departure=req.body.date2;
+    buyer=req.body.buyer;
+    price=req.body.price;
+   const merged = new MergedData({
+    pname:req.body.pname,
+    link:req.body.link,
+    username: req.body.username,
+    location1:req.body.locBuyer,
+    location2:req.body.locUser,
+    Arrival:req.body.date1,
+    Departure:req.body.date2,
+    buyer:req.body.buyer,
+    price:req.body.price
+  });
+  await merged.save()
   }
  catch(err){
   console.log(err);
@@ -127,6 +195,7 @@ app.post('/LoginBuyer', async(req, res) => {
         const link =req.body.link;
         const pickup =req.body.locUser;
         const drop =req.body.locBuyer;
+        const price=req.body.price;
         console.log(product);
       // Create a new document for the user's choices, using the extracted username field from UserCredentials
       const userChoices = new Choices({
@@ -134,13 +203,45 @@ app.post('/LoginBuyer', async(req, res) => {
         product:product,
         link:link,
         pickup:pickup,
-        drop:drop
+        drop:drop,
+        price:price
       });
   
       // Save the document to the UserChoices collection
       await userChoices.save()
-      .then(() => res.send('Product submitted'))
-      .catch((err) => res.status(500).send('Product failed'));
+
+    try {
+      const docs = await BuyerChoices.find({ loc1: req.body.locBuyer, loc2: req.body.locUser }).exec();
+      console.log(docs);
+      res.send(docs);
+    } catch (err) {
+      // Handle the error here
+      console.log(err);
+      res.send("Buyer with given preferences not found");
+    }
+     
+      })
+
+      app.post('/BuyerDetails',async(req,res)=>{
+        const username =req.body.username;
+        const d1 =req.body.date1;
+        const d2 =req.body.date2;
+        const loc1 =req.body.loc1;
+        const loc2 =req.body.loc2;
+        console.log(loc1);
+      // Create a new document for the user's choices, using the extracted username field from UserCredentials
+      const buyerChoices = new BuyerChoices({
+        username: username,
+        Departure:d1,
+        Arrival:d2,
+        loc1:loc1,
+        loc2:loc2
+      });
+  
+      // Save the document to the UserChoices collection
+      await buyerChoices.save()
+      .then(() => res.send('Buyer details submitted'))
+      .catch((err) => res.status(500).send('Buyer failed'));
       })
 app.post('/Register', async (req, res) => {
   const newUser = new User({
@@ -192,6 +293,25 @@ const userExists = await Buyer.findOne({ username:u });
     }
 
 });
+
+app.post('/xyz', async (req, res) => {
+const dataExists = await MergedData.findOne({ pname:pname,
+  link:link,
+  username: username,
+  location1:location1,
+  location2:location2,
+  Arrival:arrival,
+  Departure:departure,
+  buyer:buyer });
+    if (dataExists) {
+      res.send(dataExists);
+    }
+    else{
+     console.log("Merged data fail")
+    }
+
+});
+
 
 app.listen(3002, () => {
   console.log('Server listening on port 3002!');

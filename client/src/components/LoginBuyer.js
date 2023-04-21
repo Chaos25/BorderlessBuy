@@ -65,7 +65,7 @@ export function LoginBuyer()
             <br/>
             
             <div className='marginn'><button type="submit" className="btn next" onClick={handleSubmit}>Login</button></div>
-            {flag?<Navigate to={"/"+usernameLog+"/Findmatch"}/>:<h4></h4>}
+            {flag?<Navigate to={"/"+usernameLog+"/BuyerDetails"}/>:<h4></h4>}
        
            
             

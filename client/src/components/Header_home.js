@@ -56,6 +56,9 @@ return(
           <li className='nav-item'> 
           <Link to="/Login" className='Main_page'>     Find Your Match</Link>
           </li>
+          <li className='nav-item'>
+<Link to="/CalculateCost" className='Main_page'>Calculate Cost</Link>
+</li>
           </ul>
           <Link to="/Login">
           <button className="btn next logi MainPage">Login/Signup</button>

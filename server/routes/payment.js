@@ -7,7 +7,10 @@ const router = express.Router();
 const userTransactionConnection = mongoose.createConnection('mongodb+srv://riddhi:admin@cluster0.whbfyoh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 const orderSchema = new mongoose.Schema({
     TransactionID: String,
-    Amount: String
+    Amount: String,
+    User:String,
+    Buyer:String
+
   });
   const Order= userTransactionConnection.model('UserOrders', orderSchema);
   userTransactionConnection.on('connected', function () {
@@ -46,10 +49,15 @@ router.post("/success", async (req, res) => {
             razorpayPaymentId,
             razorpayOrderId,
             razorpaySignature,
+            price,
+            user,
+            buyer
         } = req.body;
         const userOrders = new Order({
           TransactionID:razorpayOrderId,
-          Amount:40
+          Amount:price,
+          User:user,
+          Buyer:buyer
           });
       
           // Save the document to the UserChoices collection
