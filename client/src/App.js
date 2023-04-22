@@ -22,6 +22,8 @@ import { SignupBuyer } from './components/SignupBuyer';
 import BuyerDetails from './components/BuyerDetails';
 import BuyerRegsuccessful from './components/BuyerRegsuccessful';
 import CalculateCost from './components/CalculateCost';
+import {Reviews_MainPage} from './components/Reviews_MainPage';
+import UserRating from './components/UserRating';
 
 
 
@@ -103,9 +105,12 @@ async function displayRazorpay() {
     <Routes>
   <Route path="/" element={<MainPage/>}/>
     <Route path="/MainPage" element={<MainPage/>}/>
+    {/* <Route path="/review" element={<MainPage/>}/> */}
     <Route path="/Login" element={<Login/>}/>
     <Route path="/Signup" element={<Signup/>}/>
     <Route path="/Review" element={<Reviews/>}/>
+    <Route path ="/Reviews_MainPage" element={<Reviews_MainPage/>}/>
+    <Route path ="/UserRating" element={<UserRating/>}/>
     <Route path="/LoginBuyer" element={<LoginBuyer/>}/>
     <Route path="/SignupBuyer" element={<SignupBuyer/>}/>
     <Route path="/:user/Findmatch" element={<Findmatch/>}/>
