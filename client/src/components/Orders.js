@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Header_home } from './Header_home';
 import Findmatch from './Findmatch';
+import {BrowserRouter as Router, Routes,Route, Link, Navigate,useParams } from 'react-router-dom'
+import { Header_logged_in } from './Header_logged_in';
 function Orders() {
   const [mergeddata,setmdata]=useState();
   const[f,setF]=useState()
+  const[f2,setF2]=useState()
   useEffect(()=>{
     axios.post('http://localhost:3002/xyz')
     .then(response => {
@@ -74,6 +77,8 @@ async function displayRazorpay() {
           };
 
           const result = await axios.post("http://localhost:3002/payment/success", data);
+          setF2(1);
+          {f2?<Navigate to={"/UserRating"}/>:<h4></h4>}
           console.log(result.data);
           alert(result.data);
       },
@@ -101,7 +106,7 @@ if(!mergeddata){
   return (
     
     <div>
-      <Header_home/>
+      <Header_logged_in/>
       
       <div className='card login_page'>
       <h1 className='card_title' >Confirm your preferences and proceed to pay</h1>
@@ -120,7 +125,7 @@ if(!mergeddata){
         : <p>Loading!</p>}
       <div className='marginn'><button className='btn next' onClick={displayRazorpay}>Confirm and Make Payment</button></div>
           </div>
-      
+          
         </div>
         
       

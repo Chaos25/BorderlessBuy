@@ -42,9 +42,30 @@ a {
   font-size: 30px !important;
 
 }
+table {
+  border-collapse: collapse;
+  width: 100%!important;
+  background-color: #FFFFFF!important;
+  padding-left: 30%!important;
+}
+th{
+  background-color:rgba(43, 52, 103,0.2);
+}
+th, td {
+  color: #2B3467!important;
+  padding: 10px;
+  padding-left: 20px;
+  
+  
+}
 
+
+
+.dashboard_bg{
+  background-color: #F2F2F2!important;
+}
 .card {
-  width: 80%;
+  width: fit-content!important;
   height: max-content;
   justify-content: center;
   text-align: center;
@@ -53,6 +74,10 @@ a {
   margin-top: 50px;
   border-color: #FFFFFF !important;
   border-radius: 10px !important;
+}
+#text-area{
+  text-decoration: none;
+  border: #FFFFFF!important;
 }
 
 .login_signup_card {
@@ -186,8 +211,11 @@ select.form-control:focus {
   font-size: large !important;
 }
 
-.btn:hover {
+.next:hover {
   background-color: #EB455F !important;
+}
+.next2:hover{
+  background-color:rgba(235, 69, 95,0.2); ;
 }
 
 .marginn {
@@ -273,7 +301,10 @@ hr {
   transform: translateX(-50%);
 
 }
-
+.db_card{
+  display: flex;
+  flex-direction: column;
+  margin-top: 3%!important;}
 .elfsight-app-8e7ee7c1-9f8e-4773-804f-2124edbb310a a {
   display: none !important;
 

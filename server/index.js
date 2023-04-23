@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const bodyParser = require('body-parser');
 const cors = require("cors");
+const { Int32 } = require("mongodb");
 app.use(express.json());
 app.use(cors());
 app.use("/payment", require("./routes/payment"));
@@ -35,17 +36,20 @@ const BuyerSchema = new mongoose.Schema({
   password: String
 });
 var uname;
-var link, location1, location2, username, buyer, arrival, departure, price, pname;
+var link, location1, location2, username, buyer, arrival, departure, price, pname,OTP;
 const mergeSchema = new mongoose.Schema({
   pname: String,
   link: String,
   username: String,
   location1: String,
+  uploc:String,
   location2: String,
   Arrival: String,
   Departure: String,
   buyer: String,
-  price: String
+  price: String,
+  OTP:Number,
+  status:String
 
 });
 
@@ -69,7 +73,7 @@ const buyerchoicesSchema = new mongoose.Schema({
 const mainpagereviewsSchema = new mongoose.Schema({
   username: String,
   location: String,
-  content: String
+  review: String
 
 });
 
@@ -157,6 +161,11 @@ app.post('/Merge', async (req, res) => {
     departure = req.body.date2;
     buyer = req.body.buyer;
     price = req.body.price;
+    const key = Math.floor(Math.random() * 1000000)
+      .toString()
+      .padStart(6, '0');
+      OTP=key;
+      console.log(OTP)
     const merged = new MergedData({
       pname: req.body.pname,
       link: req.body.link,
@@ -166,7 +175,10 @@ app.post('/Merge', async (req, res) => {
       Arrival: req.body.date1,
       Departure: req.body.date2,
       buyer: req.body.buyer,
-      price: req.body.price
+      price: req.body.price,
+      OTP:key,
+      status:'inactive',
+      uploc:req.body.locBuyer
     });
     await merged.save()
   }
@@ -176,6 +188,23 @@ app.post('/Merge', async (req, res) => {
   // console.log(`Username: ${username}, Password: ${password}`);
 
 });
+app.post('/OTP',async(req,res)=>{
+console.log(req.body.secretKey)
+console.log(OTP)
+res.send(OTP)
+
+
+
+})
+app.post('/PostReview',async(req,res)=>{
+  const review=new ReviewsMain({
+    username:req.body.username,
+    location:req.body.loc,
+    review:req.body.content
+
+  });
+  await review.save();
+})
 app.post('/LoginBuyer', async (req, res) => {
   try {
     console.log(req.body.username);
@@ -307,7 +336,93 @@ app.post('/RegisterBuyer', async (req, res) => {
   }
 
 });
-
+app.post('/chart-data',async(req,res)=>{
+ const data= {
+    "labels": ["January", "February", "March", "April", "May", "June", "July"],
+    "dataset1": [10, 20, 30, 40, 50, 60, 70],
+    "dataset2": [70, 60, 50, 40, 30, 20, 10]
+  }
+  res.json(data)
+  
+})
+app.post('/dataTable', async (req, res) => {
+  const data = [
+    {
+      "id": 1,
+      "pname": "Product 1",
+      "price": 10.99,
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "pname": "Product 2",
+      "price": 15.99,
+      "status": "inactive"
+    },
+    {
+      "id": 3,
+      "pname": "Product 3",
+      "price": 20.99,
+      "status": "active"
+    },
+    {
+      "id": 4,
+      "pname": "Product 4",
+      "price": 25.99,
+      "status": "inactive"
+    }
+  ];
+  res.json(data);
+});
+app.post('/reviewTable', async (req, res) => {
+  const data = [
+    {
+      "id": 1,
+      "pname": "Product 1",
+      "price": 10.99,
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "pname": "Product 2",
+      "price": 15.99,
+      "status": "inactive"
+    },
+    {
+      "id": 3,
+      "pname": "Product 3",
+      "price": 20.99,
+      "status": "active"
+    },
+    {
+      "id": 4,
+      "pname": "Product 4",
+      "price": 23.99,
+      "status": "inactive"
+    }
+  ];
+  res.json(data);
+});
+app.post('/Verify',async(req,res)=>{
+  console.log(req.body.otp);
+  console.log(req.body.otp)
+  console.log(OTP)
+  if(req.body.otp===OTP){
+    const dataExists = await MergedData.findOne({
+      OTP:req.body.otp})
+      if (dataExists) {
+        dataExists.status='active';
+        dataExists.save()
+        console.log("Status updated")
+      }
+      else {
+        console.log("Status update failed")
+      }
+  res.send('Verified')}
+  else{
+    res.send("Incorrect")
+  }
+})
 app.post('/xyz', async (req, res) => {
   const dataExists = await MergedData.findOne({
     pname: pname,

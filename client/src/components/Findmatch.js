@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { Header_home } from './Header_home'
+import { Header_logged_in } from './Header_logged_in';
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios'
 import {BrowserRouter as Router, Routes,Route, Link, Navigate,useParams } from 'react-router-dom'
@@ -67,7 +68,7 @@ function Findmatch() {
     
   return (
     <>
-    <Header_home/><div className="container carousel-wrapper-custom carousel-wrapper" style={{ height: '300px' }}>
+    <Header_logged_in/><div className="container carousel-wrapper-custom carousel-wrapper" style={{ height: '300px' }}>
     <Carousel className='car'>
       <Carousel.Item>
         <img

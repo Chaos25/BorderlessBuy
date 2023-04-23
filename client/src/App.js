@@ -24,6 +24,8 @@ import BuyerRegsuccessful from './components/BuyerRegsuccessful';
 import CalculateCost from './components/CalculateCost';
 import {Reviews_MainPage} from './components/Reviews_MainPage';
 import UserRating from './components/UserRating';
+import UserProfile from './components/UserProfile';
+import BuyerProfile from './components/BuyerProfile';
 
 
 
@@ -110,7 +112,7 @@ async function displayRazorpay() {
     <Route path="/Signup" element={<Signup/>}/>
     <Route path="/Review" element={<Reviews/>}/>
     <Route path ="/Reviews_MainPage" element={<Reviews_MainPage/>}/>
-    <Route path ="/UserRating" element={<UserRating/>}/>
+    <Route path ="/:user/UserRating" element={<UserRating/>}/>
     <Route path="/LoginBuyer" element={<LoginBuyer/>}/>
     <Route path="/SignupBuyer" element={<SignupBuyer/>}/>
     <Route path="/:user/Findmatch" element={<Findmatch/>}/>
@@ -118,6 +120,8 @@ async function displayRazorpay() {
     <Route path="/:user/Person" element={<Person/>}/>
     <Route path="/:user/BuyerDetails" element={<BuyerDetails/>}/>
     <Route path="/:user/Successfull" element={<BuyerRegsuccessful/>}/>
+    <Route path="/:user/UserProfile" element={<UserProfile/>}/>
+    <Route path="/:user/BuyerProfile" element={<BuyerProfile/>}/>
     <Route
           path="/payment/status/:paymentId"
           element={<PaymentStatus/>}
