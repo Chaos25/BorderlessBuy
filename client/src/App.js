@@ -12,7 +12,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Findmatch from './components/Findmatch';
 import Results from './components/Results'
-import Person from './components/Person';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import PaymentStatus from './components/PaymentStatus';
 import Orders from './components/Orders';
@@ -26,6 +25,7 @@ import {Reviews_MainPage} from './components/Reviews_MainPage';
 import UserRating from './components/UserRating';
 import UserProfile from './components/UserProfile';
 import BuyerProfile from './components/BuyerProfile';
+import AirplaneAnimation from './components/AirplaneAnimation';
 
 
 
@@ -105,7 +105,7 @@ async function displayRazorpay() {
 
     <Router>
     <Routes>
-  <Route path="/" element={<MainPage/>}/>
+  <Route path="/" element={<AirplaneAnimation/>}/>
     <Route path="/MainPage" element={<MainPage/>}/>
     {/* <Route path="/review" element={<MainPage/>}/> */}
     <Route path="/Login" element={<Login/>}/>
@@ -117,7 +117,6 @@ async function displayRazorpay() {
     <Route path="/SignupBuyer" element={<SignupBuyer/>}/>
     <Route path="/:user/Findmatch" element={<Findmatch/>}/>
     <Route path="/:user/Results" element={<Results/>}/>
-    <Route path="/:user/Person" element={<Person/>}/>
     <Route path="/:user/BuyerDetails" element={<BuyerDetails/>}/>
     <Route path="/:user/Successfull" element={<BuyerRegsuccessful/>}/>
     <Route path="/:user/UserProfile" element={<UserProfile/>}/>

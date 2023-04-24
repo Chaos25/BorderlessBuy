@@ -28,7 +28,7 @@ export const MainPage = () => {
                         <div className="para">
                             <br />
                             <div>
-                                Our webapp, is designed to make international shopping accessible and affordable for users in India. By leveraging strategic partnerships and cutting-edge technology, DutyFreeIndia enables users to order products from foreign countries without having to pay any import charges or taxes.
+                                Our webapp, is designed to make international shopping accessible and affordable for users in India. By leveraging strategic partnerships and cutting-edge technology, BorderlessBuy enables users to order products from foreign countries without having to pay any import charges or taxes.
 
                                 With a user-friendly interface and a wide selection of products from popular brands and retailers around the world, BorderlessBuy makes it easy for users to find and purchase the items they need or want. Users can browse the app's inventory by category, brand, or keyword, and use advanced search filters to narrow down their options.
 

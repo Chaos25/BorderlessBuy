@@ -24,19 +24,12 @@ function ReviewTable() {
     <thead>
       <tr>
         <th >User</th>
-        <th >Review</th>
         <th >Rating</th>
       </tr>
     </thead>
     <tbody>
-      {data.map((item, index) => (
-        <tr key={item.id} style={{borderBottom: '1px solid lightgray',width:'60%'}}>
-          <td>{item.pname}</td>
-          <td>{item.price}</td>
-          <td>
-          </td>
-        </tr>
-      ))}
+     <td>{data.username}</td>
+     <td>{data.rating}</td>
     </tbody>
   </table>
   );

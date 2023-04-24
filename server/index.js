@@ -33,10 +33,11 @@ const userSchema = new mongoose.Schema({
 });
 const BuyerSchema = new mongoose.Schema({
   username: String,
-  password: String
+  password: String,
+  rating:Number
 });
 var uname;
-var link, location1, location2, username, buyer, arrival, departure, price, pname,OTP;
+var link, location1, location2, username, buyer, arrival, departure, price, pname,OTP,locup;
 const mergeSchema = new mongoose.Schema({
   pname: String,
   link: String,
@@ -198,10 +199,40 @@ res.send(OTP)
 })
 app.post('/UpdateLoc',async(req,res)=>{
   console.log(req.body.locup)
-  
+  locup=req.body.locup
+  const data = await MergedData.find({
+    buyer:buyer
+  })
+  if(data){
+    data.uploc=req.body.locup
+  res.json("Updated");}
+  else{
+    console.log("Error in loc update")
+  }
   
   
   })
+  app.post('/Rating',async(req,res)=>{
+    console.log(req.body.rating)
+    console.log(buyer)
+    const data = await Buyer.findOne({
+      username:buyer
+    })
+    if(data){
+      data.rating=req.body.rating
+    res.json("Updated Rating");}
+    else{
+      console.log("Error in rating update")
+    }
+    
+    
+    })
+  app.post('/UpdateLoca',async(req,res)=>{
+    console.log("op"+locup)
+    res.json(locup);
+    
+    
+    })
 app.post('/PostReview',async(req,res)=>{
   const review=new ReviewsMain({
     username:req.body.username,
@@ -320,7 +351,8 @@ app.post('/Register', async (req, res) => {
 app.post('/RegisterBuyer', async (req, res) => {
   const newUser = new Buyer({
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    rating:0
   });
   console.log(req.body.username + " " + req.body.password);
   u = req.body.username;
@@ -352,62 +384,28 @@ app.post('/chart-data',async(req,res)=>{
   
 })
 app.post('/dataTable', async (req, res) => {
-  const data = [
-    {
-      "id": 1,
-      "pname": "Product 1",
-      "price": 10.99,
-      "status": "active"
-    },
-    {
-      "id": 2,
-      "pname": "Product 2",
-      "price": 15.99,
-      "status": "inactive"
-    },
-    {
-      "id": 3,
-      "pname": "Product 3",
-      "price": 20.99,
-      "status": "active"
-    },
-    {
-      "id": 4,
-      "pname": "Product 4",
-      "price": 25.99,
-      "status": "inactive"
-    }
-  ];
-  res.json(data);
+  console.log(username)
+  const data = await MergedData.find({
+    username:username
+  })
+  if(data){
+    console.log("hi"+data)
+  res.json(data);}
+  else{
+    console.log("Error in tablle")
+  }
 });
 app.post('/reviewTable', async (req, res) => {
-  const data = [
-    {
-      "id": 1,
-      "pname": "Product 1",
-      "price": 10.99,
-      "status": "active"
-    },
-    {
-      "id": 2,
-      "pname": "Product 2",
-      "price": 15.99,
-      "status": "inactive"
-    },
-    {
-      "id": 3,
-      "pname": "Product 3",
-      "price": 20.99,
-      "status": "active"
-    },
-    {
-      "id": 4,
-      "pname": "Product 4",
-      "price": 23.99,
-      "status": "inactive"
-    }
-  ];
-  res.json(data);
+  console.log(buyer)
+  const data = await Buyer.findOne({
+    username:buyer
+  })
+  if(data){
+    console.log("hi"+data)
+  res.json(data);}
+  else{
+    console.log("Error in tablle")
+  }
 });
 app.post('/Verify',async(req,res)=>{
   console.log(req.body.otp);

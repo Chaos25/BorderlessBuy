@@ -66,15 +66,8 @@ function BuyerProfile() {
     <Header_logged_in_buyer/>
     <div className='container'>
           <h3 className='pink'>
-            Welcome back,{' '}
-            <div className='heading_mainn'>
-              {' '}
-              <Typewriter
-                onInit={(typewriter) => {
-                  typewriter.typeString(usernameLog).start();
-                }}
-              />
-            </div>
+            Welcome back!
+            
           </h3>
           <br />
           <br />
@@ -90,27 +83,22 @@ function BuyerProfile() {
             value={otpValue}
             onChange={handleInputChange}
           />
+          <br/>
         <button className='btn next' onClick={handleVerifyClick}>
             Verify OTP
           </button>
-              <div className='card db_card'><input
+             
+            </div>
+    
+            <div className='card db_card'><input
             type='text'
             placeholder='Enter location'
             onChange={(e)=>{
                 setloc(e.target.value);
               }}
           />
+          <br/>
         <button className='btn next' onClick={handlelocationUpdate}>Update Location</button></div>
-            </div>
-            <div className='card col-md-4'>
-            </div>
-    <div className='card col-md-6 col-sm-12'><h6>Write a review</h6>
-    <input type='text' placeholder='Location'></input>
-    <br/>
-    <textarea id="text-area" placeholder='Review'  rows={5} cols={50} />
-    <br/>
-    <button className='btn next' >Submit</button></div>
-    
   </div>
   <br/>
   <br/>

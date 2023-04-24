@@ -53,7 +53,7 @@ export default function BuyerDetails() {
       <br/>
       <br/>
       <div className='marginn'><button className='btn next' onClick={handleSubmit}>Submit</button></div>
-      {flag?<Navigate to={"/"+usernameLog+"/Successfull"}/>:<h4></h4>}
+      {flag?<Navigate to={"/"+usernameLog+"/BuyerProfile"}/>:<h4></h4>}
           </div>
    
     </>

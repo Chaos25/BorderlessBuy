@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom';
 import { Header_home } from './Header_home';
 import Findmatch from './Findmatch';
 import {BrowserRouter as Router, Routes,Route, Link, Navigate,useParams } from 'react-router-dom'
 import { Header_logged_in } from './Header_logged_in';
 function Orders() {
+  const usernameLog=useParams.user
   const [mergeddata,setmdata]=useState();
   const[f,setF]=useState()
   const[f2,setF2]=useState()
+  const[f3,setF3]=useState()
   useEffect(()=>{
     axios.post('http://localhost:3002/xyz')
     .then(response => {
@@ -76,9 +79,13 @@ async function displayRazorpay() {
               buyer:mergeddata.buyer
           };
 
-          const result = await axios.post("http://localhost:3002/payment/success", data);
-          setF2(1);
-          {f2?<Navigate to={"/UserRating"}/>:<h4></h4>}
+          const result = await axios.post("http://localhost:3002/payment/success", data).then(response=>{
+            setF2(1);
+          }).catch(err=>{
+            console.log("oops")
+          })
+       
+          
           console.log(result.data);
           alert(result.data);
       },
@@ -125,7 +132,7 @@ if(!mergeddata){
         : <p>Loading!</p>}
       <div className='marginn'><button className='btn next' onClick={displayRazorpay}>Confirm and Make Payment</button></div>
           </div>
-          
+          {f2?<Navigate to={"/"+usernameLog+"/UserRating"}/>:<h4></h4>}
         </div>
         
       

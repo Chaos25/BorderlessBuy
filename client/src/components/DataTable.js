@@ -9,6 +9,7 @@ function DataTable() {
 
   useEffect(() => {
     axios.post('http://localhost:3002/dataTable').then((response) => {
+      console.log(response.data)
       setData(response.data);
       setF(1);
     }).catch(error => {

@@ -3,7 +3,8 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import { Header_home } from './Header_home';
-
+import axios from 'axios'
+import { Header_logged_in } from './Header_logged_in';
 const labels = {
     0.5: 'Very Poor',
     1: 'Poor',
@@ -25,9 +26,28 @@ export default function UserRating() {
     const [value, setValue] = React.useState(0);
     const [hover, setHover] = React.useState(-1);
 
+    const rating =async (event) => {
+        event.preventDefault();
+        
+        const data = {
+            rating:value
+       
+           };
+        await axios.post('http://localhost:3002/Rating', data)
+          .then(response => {
+            if(response.data==='Updated Rating'){
+              alert('Updated')
+            }
+            else alert('Cannot Update')
+          })
+          .catch(error => {
+            console.log(error);
+          });
+         
+      };
     return (
         <>
-        <Header_home/>
+        <Header_logged_in/>
         <div className='userratingpage'>
         <h1 >Leave a Rating For Your Traveller! </h1>
         <div className='userrating'>
@@ -58,7 +78,7 @@ export default function UserRating() {
         </div>
         <br/>
         <p>You have given the traveller a rating of : {value}</p>
-        <button className='btn ratingbtn'>Submit</button>
+        <button className='btn ratingbtn' onClick={rating}>Submit</button>
         </div>
         
         </>

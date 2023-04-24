@@ -327,3 +327,95 @@ hr {
   color: #2B3467 !important;
   background-color: #BAD7E9 !important;
 }
+.animation1 svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+
+
+}
+
+.monkey {
+  stroke: #2B3467;
+  stroke-width: 2px;
+  stroke-dashoffset: -2000;
+  stroke-dasharray: 2000;
+  animation-name: monkey;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes monkey {
+  0% {
+    stroke-dashoffset: -2000;
+    stroke: #2B3467;
+  }
+
+  30% {
+    stroke: #BAD7E9;
+  }
+
+  50% {
+    stroke: #2B3467;
+  }
+
+  70% {
+    stroke: #BAD7E9;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke: #2B3467;
+  }
+}
+
+.animation2 svg {
+  font-family: 'Russo One', sans-serif;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.animation2 svg text {
+
+  animation: stroke 4s infinite alternate;
+  stroke-width: 2;
+  stroke: #2B3467;
+  font-size: 140px;
+}
+@keyframes stroke {
+  0% {
+    fill: rgba(72, 138, 20, 0);
+    stroke: rgba(54, 95, 160, 1);
+    stroke-dashoffset: 25%;
+    stroke-dasharray: 0 50%;
+    stroke-width: 2;
+  }
+
+  70% {
+    fill: rgba(72, 138, 20, 0);
+    stroke: rgba(54, 95, 160, 1);
+  }
+
+  80% {
+    fill: rgba(72, 138, 20, 0);
+    stroke: rgba(54, 95, 160, 1);
+    stroke-width: 3;
+  }
+
+  100% {
+    fill: rgba(72, 138, 204, 1);
+    stroke: rgba(54, 95, 160, 0);
+    stroke-dashoffset: -25%;
+    stroke-dasharray: 50% 0;
+    stroke-width: 0;
+  }
+}
+
+.animatebody {
+  background: rgb(43,52,103);
+  background: linear-gradient(158deg, rgba(43,52,103,1) 0%, rgba(186,215,233,1) 48%);
+}

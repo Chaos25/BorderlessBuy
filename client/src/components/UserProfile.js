@@ -7,13 +7,14 @@ import DataTable from './DataTable';
 import Chart from 'chart.js/auto';
 
 function UserProfile() {
+  const[location,setlocation]=useState('')
   const usernameLog = useParams().user;
   const [showKey, setShowKey] = useState(false);
   const [secretKey, setSecretKey] = useState('');
   const [text, setText] = useState('');
   const[loc,setLoc]=useState('')
-  const [chartData, setChartData] = useState(null);
-  const chartRef = React.createRef();
+    /*const [chartData, setChartData] = useState(null);
+    const chartRef = React.createRef();*/
 
   const handleTextChange = (event) => {
     setText(event.target.value);
@@ -29,6 +30,17 @@ function UserProfile() {
       };
     await axios.post('http://localhost:3002/PostReview', data)
       .then(console.log("Review submitted"))
+      .catch(error => {
+        console.log(error);
+      });
+     
+    };
+    
+  const updateLoc = async event => {
+    event.preventDefault();
+    await axios.post('http://localhost:3002/UpdateLoca')
+      .then(response=>{console.log(response.data)
+      setlocation(response.data)})
       .catch(error => {
         console.log(error);
       });
@@ -54,50 +66,7 @@ setSecretKey(response.data)}).catch(error=>{
     setShowKey(!showKey);
   };
 
-  useEffect(() => {
-    axios
-      .post('http://localhost:3002/chart-data')
-      .then((res) => {
-        setChartData(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    if (chartData) {
-      const ctx = chartRef.current.getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: chartData.labels,
-          datasets: [
-            {
-              label: 'Dataset 1',
-              data: chartData.data1,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgba(255, 99, 132, 1)',
-              borderWidth: 1,
-            },
-            {
-              label: 'Dataset 2',
-              data: chartData.data2,
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgba(54, 162, 235, 1)',
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-    }
-  }, [chartData]);
-
+  
   return (
     <>
       <div className='dashboard_bg'>
@@ -123,11 +92,11 @@ setSecretKey(response.data)}).catch(error=>{
             <div className='card db_card col-md-2 col-sm-12' onClick={toggleKeyVisibility}>
               <h1 style={{ color: '#2B3467' }}>{showKey ? secretKey : ''}</h1>
               {!showKey && <button className='btn next' onClick={generateKey}>Get OTP for current order</button>}
-              <div className='card db_card'>Track your Order</div>
+              
             </div>
-            <div className='card col-md-4'>
-              <canvas ref={chartRef} id='myChart' width='400' height='400'></canvas>
-            </div>
+            <div className='card db_card'><button className="btn next" onClick={updateLoc}>Track your Order</button>
+              {location && <p>Location: {location}</p>}
+              </div>
     <div className='card col-md-6 col-sm-12'><h6>Write a review</h6>
     <input type='text' onChange={(e)=>{
             setLoc(e.target.value);
