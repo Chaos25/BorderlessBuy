@@ -57,7 +57,7 @@ return(
            
           </li>
           <li className='nav-item'> 
-          <Link to="/Findmatch" className='Main_page'>     Find Your Match</Link>
+          <Link to={"/"+usernameLog+"/Findmatch"} className='Main_page'>     Find Your Match</Link>
           </li>
           <li className='nav-item'>
 <Link to="/CalculateCost" className='Main_page'>Calculate Cost</Link>
