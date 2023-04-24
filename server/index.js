@@ -219,7 +219,7 @@ app.post('/UpdateLoc',async(req,res)=>{
       username:buyer
     })
     if(data){
-      data.rating=req.body.rating
+      data.rating=parseInt(req.body.rating)
     res.json("Updated Rating");}
     else{
       console.log("Error in rating update")

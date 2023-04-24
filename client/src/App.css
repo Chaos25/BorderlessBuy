@@ -305,8 +305,10 @@ hr {
   display: flex;
   flex-direction: column;
   margin-top: 3%!important;}
-.elfsight-app-8e7ee7c1-9f8e-4773-804f-2124edbb310a a {
+
+.NumberCounter__Component-sc-1urc3-0 a{
   display: none !important;
+ 
 
 }
 

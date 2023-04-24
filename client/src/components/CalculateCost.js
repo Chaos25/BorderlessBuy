@@ -70,62 +70,62 @@ function CalculateCost() {
     //     console.log(indianCost);
     // }
     return (<>
-    <div>
-        <Header_home />
-        <div className='container'>
-            <h1 className='card_title' >Calculate Your Shipment</h1>
-            <div > <br />
-                <br />
-                <br />
-                <div className='row'>
-                <div className='col-md-6'><form class='shipform' onSubmit={handleSubmit}>
-                    <label >
-                        Origin City:
-                        <input  type="text" value={originCity} onChange={(e) => setOriginCity(e.target.value)} />
-                    </label>
+        <div>
+            <Header_home />
+            <div className='container'>
+                <h1 className='card_title' >Calculate Your Shipment</h1>
+                <div > <br />
                     <br />
-                    <label >
-                        Origin State:
-                        <input type="text" value={originState} onChange={(e) => setOriginState(e.target.value)} />
-                    </label>
                     <br />
-                    <label >
-                        Destination City:
-                        <input class="shiptext1" type="text" value={destinationCity} onChange={(e) => setDestinationCity(e.target.value)} />
-                    </label>
-                    <br />
-                    <label >
-                        Package Value:
-                        <input type="text" value={packageValue} onChange={(e) => setPackageValue(e.target.value)} />
-                    </label >
-                    <br />
-                    <label  >
-                        Weight (in kg):
-                        <input type="number" value={weight} onChange={handleWeightChange} />
-                    </label>
-                    <br />
+                    <div className='row'>
+                        <div className='col-md-6'><form class='shipform' onSubmit={handleSubmit}>
+                            <label >
+                                Origin City:
+                                <input type="text" value={originCity} onChange={(e) => setOriginCity(e.target.value)} />
+                            </label>
+                            <br />
+                            <label >
+                                Origin State:
+                                <input type="text" value={originState} onChange={(e) => setOriginState(e.target.value)} />
+                            </label>
+                            <br />
+                            <label >
+                                Destination City:
+                                <input type="text" value={destinationCity} onChange={(e) => setDestinationCity(e.target.value)} />
+                            </label>
+                            <br />
+                            <label >
+                                Package Value:
+                                <input type="text" value={packageValue} onChange={(e) => setPackageValue(e.target.value)} />
+                            </label >
+                            <br />
+                            <label  >
+                                Weight (in kg):
+                                <input type="number" value={weight} onChange={handleWeightChange} />
+                            </label>
+                            <br />
 
-                    <br />
-                    <button className="btn next logi" type="submit">Calculate Shipping Cost</button>
-                    {shippingCost > 0 && (
-                    <p>The shipping cost is {shippingCost} USD.</p>
+                            <br />
+                            <button className="btn next logi" type="submit">Calculate Shipping Cost</button>
+                            {shippingCost > 0 && (
+                                <p>The shipping cost is {shippingCost} USD.</p>
 
-                )}
-                {indianCost > 0 && (<p>The shipping cost in rupees is {indianCost} INR.</p>)}
-                {/* <form onSubmit={handleSubmit1}>
+                            )}
+                            {indianCost > 0 && (<p>The shipping cost in rupees is {indianCost} INR.</p>)}
+                            {/* <form onSubmit={handleSubmit1}>
                     <button className='btn next1'> Convert</button>
                 </form>
                 {indianCost>0 && (<p>The shipping cost in rupees is {indianCost}</p>
 )} */}
-                </form></div>
-                <div className='col-md-6'><img src="https://img.freepik.com/free-vector/online-payment-account-credit-card-details-personal-information-financial-transaction-cartoon-character-bank-worker-internet-banking_335657-2379.jpg?w=740&t=st=1682346882~exp=1682347482~hmac=6368a9ba6508dc154f4a28e61491d692cd1c620828a7f0f862fabbc5e4106eae" width="600px"/></div>
+                        </form></div>
+                        <div className='col-md-6'><img src="https://img.freepik.com/free-vector/online-payment-account-credit-card-details-personal-information-financial-transaction-cartoon-character-bank-worker-internet-banking_335657-2379.jpg?w=740&t=st=1682346882~exp=1682347482~hmac=6368a9ba6508dc154f4a28e61491d692cd1c620828a7f0f862fabbc5e4106eae" width="600px" /></div>
+                    </div>
+                    <br />
+
+
+
                 </div>
-                <br/>
-               
-
-
             </div>
-        </div>
         </div>
 
     </>
