@@ -196,6 +196,12 @@ res.send(OTP)
 
 
 })
+app.post('/UpdateLoc',async(req,res)=>{
+  console.log(req.body.locup)
+  
+  
+  
+  })
 app.post('/PostReview',async(req,res)=>{
   const review=new ReviewsMain({
     username:req.body.username,

@@ -10,6 +10,7 @@ function BuyerProfile() {
     const usernameLog=useParams.user
     const [showInput, setShowInput] = useState(false);
   const [otpValue, setOtpValue] = useState('');
+  const [loc, setloc] = useState('');
 
   const handleVerifyClick =async (event) => {
     event.preventDefault();
@@ -28,6 +29,25 @@ function BuyerProfile() {
           alert('Verified')
         }
         else alert('Wrong OTP')
+      })
+      .catch(error => {
+        console.log(error);
+      });
+     
+  };
+  const handlelocationUpdate =async (event) => {
+    event.preventDefault();
+    
+    const data = {
+        locup:loc
+   
+       };
+    await axios.post('http://localhost:3002/UpdateLoc', data)
+      .then(response => {
+        if(response.data==='Updated'){
+          alert('Updated')
+        }
+        else alert('Cannot Update')
       })
       .catch(error => {
         console.log(error);
@@ -73,7 +93,14 @@ function BuyerProfile() {
         <button className='btn next' onClick={handleVerifyClick}>
             Verify OTP
           </button>
-              <div className='card db_card'>Update Location</div>
+              <div className='card db_card'><input
+            type='text'
+            placeholder='Enter location'
+            onChange={(e)=>{
+                setloc(e.target.value);
+              }}
+          />
+        <button className='btn next' onClick={handlelocationUpdate}>Update Location</button></div>
             </div>
             <div className='card col-md-4'>
             </div>
