@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { Header_home } from './Header_home'
 import { Header_logged_in } from './Header_logged_in';
+import Rating from '@mui/material/Rating';
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios'
 import {BrowserRouter as Router, Routes,Route, Link, Navigate,useParams } from 'react-router-dom'
@@ -164,7 +165,7 @@ function Findmatch() {
         <div>Location: {data.loc1}</div>
         <div>Date of departure: {data.Departure}</div>
         <div>Date of arrival: {data.Arrival}</div>
-        <div>Rating:</div>
+        <div>Rating:<Rating name="read-only" value={data.rating} precision={0.5} readOnly /></div>
       </div>
     </Link>
   </div>

@@ -220,6 +220,7 @@ app.post('/UpdateLoc',async(req,res)=>{
     })
     if(data){
       data.rating=parseInt(req.body.rating)
+      await data.save()
     res.json("Updated Rating");}
     else{
       console.log("Error in rating update")
@@ -292,8 +293,17 @@ app.post('/Findmatch', async (req, res) => {
 
   try {
     const docs = await BuyerChoices.find({ loc1: req.body.locBuyer, loc2: req.body.locUser }).exec();
-    console.log(docs);
-    res.send(docs);
+    const docsWithRating = [];
+
+for (const doc of docs) {
+  const { username:username1 } = doc;
+  const data = await Buyer.findOne({ username:username1 });
+  if (data) {
+    const docWithRating = { ...doc.toObject(), rating: data.rating };
+    docsWithRating.push(docWithRating);
+  }
+}
+res.send(docsWithRating);
   } catch (err) {
     // Handle the error here
     console.log(err);

@@ -131,7 +131,9 @@ if(!mergeddata){
         </div>
         : <p>Loading!</p>}
       <div className='marginn'><button className='btn next' onClick={displayRazorpay}>Confirm and Make Payment</button></div>
+      <p><Link to={"/"+usernameLog+"/UserRating"}>Please rate your buyer</Link></p>
           </div>
+         
           {f2?<Navigate to={"/"+usernameLog+"/UserRating"}/>:<h4></h4>}
         </div>
         

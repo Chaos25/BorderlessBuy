@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes,Route, Link,Navigate,useParams } from 'r
 import { Header_home } from './Header_home';
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Header_logged_in_buyer } from './Header_logged_in_buyer';
 export default function BuyerDetails() {
     const usernameLog= useParams().user
     const[flag,setF]=useState()
@@ -37,7 +38,7 @@ export default function BuyerDetails() {
     };
   return (
     <>
-     <Header_home/>
+     <Header_logged_in_buyer/>
     <br/>
     <div className='card login_page'>
       <h1 className='card_title' >Please fill in your details:</h1>
